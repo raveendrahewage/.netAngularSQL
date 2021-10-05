@@ -1,0 +1,162 @@
+<div class="my-3">
+  <input
+    type="button"
+    value="New employee"
+    class="btn btn-info"
+    (click)="showCreateEmployeeDialog()"
+  />
+</div>
+<div class="table-wrapper-scroll-y my-custom-scrollbar my-3">
+  <table class="table table-bordered table-striped mb-0">
+    <thead>
+      <tr>
+        <th>Employee ID</th>
+        <th>Employee Name</th>
+        <th>Employee Salary</th>
+        <th>Department Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="employeeInformation">
+      <tr *ngFor="let employee of employeeInformation">
+        <td>{{ employee.employeeId }}</td>
+        <td>{{ employee.employeeName }}</td>
+        <td>{{ employee.salary }}</td>
+        <td>{{ employee.departmentName }}</td>
+        <td>
+          <input
+            type="button"
+            value="Edit"
+            class="btn btn-primary m-1"
+            (click)="showEditEmployeeDialog(employee)"
+          />
+          <input
+            type="button"
+            value="Delete"
+            class="btn btn-danger m-1"
+            (click)="deleteEmployee(employee.employeeId)"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="myModal1" class="modal">
+  <div class="modal-content container">
+    <span class="close" (click)="showCreateEmployeeDialog()">&times;</span>
+    <form
+      #employeeInfo1="ngForm"
+      (ngSubmit)="onSubmit1(employeeInfo1.value); employeeInfo1.resetForm()"
+    >
+      <div class="table">
+        <div class="row my-2">
+          <div class="col-md-6">
+            <label for="employeename">Employee Name: </label>
+          </div>
+          <div class="col-md-6">
+            <input
+              type="text"
+              name="employeeName"
+              class="form-control"
+              ngModel
+              required
+            />
+          </div>
+        </div>
+        <div class="row my-2">
+          <div class="col-md-6">
+            <label for="employeesalary">Salary: </label>
+          </div>
+          <div class="col-md-6">
+            <input
+              type="text"
+              name="salary"
+              class="form-control"
+              ngModel
+              required
+            />
+          </div>
+        </div>
+        <div class="row my-2">
+          <div class="col-md-6">
+            <label for="departmentname">Department name: </label>
+          </div>
+          <div class="col-md-6">
+            <input
+              type="text"
+              name="departmentName"
+              class="form-control"
+              ngModel
+              required
+            />
+          </div>
+        </div>
+      </div>
+      <input type="submit" value="Submit" class="btn btn-primary" />
+    </form>
+  </div>
+</div>
+
+<div id="myModal2" class="modal">
+  <div class="modal-content container">
+    <span class="close" (click)="toggleEditEmployeeDialog()">&times;</span>
+    <form #employeeInfo2="ngForm" (ngSubmit)="onSubmit2(employeeInfo2.value)">
+      <div class="table">
+        <input
+          type="text"
+          name="employeeId"
+          style="display: none"
+          ngModel
+          [(ngModel)]="employeeTemp.employeeId"
+        />
+        <div class="row my-2">
+          <div class="col-md-6">
+            <label for="employeename">Employee Name: </label>
+          </div>
+          <div class="col-md-6">
+            <input
+              type="text"
+              name="employeeName"
+              class="form-control"
+              ngModel
+              [(ngModel)]="employeeTemp.employeeName"
+              required
+            />
+          </div>
+        </div>
+        <div class="row my-2">
+          <div class="col-md-6">
+            <label for="employeesalary">Salary: </label>
+          </div>
+          <div class="col-md-6">
+            <input
+              type="text"
+              name="salary"
+              class="form-control"
+              ngModel
+              [(ngModel)]="employeeTemp.salary"
+              required
+            />
+          </div>
+        </div>
+        <div class="row my-2">
+          <div class="col-md-6">
+            <label for="departmentname">Department name: </label>
+          </div>
+          <div class="col-md-6">
+            <input
+              type="text"
+              name="departmentName"
+              class="form-control"
+              ngModel
+              [(ngModel)]="employeeTemp.departmentName"
+              required
+            />
+          </div>
+        </div>
+      </div>
+      <input type="submit" value="Submit" class="btn btn-primary" />
+    </form>
+  </div>
+</div>
